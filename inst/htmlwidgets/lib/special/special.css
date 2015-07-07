@@ -1,15 +1,24 @@
-circle {
-  fill: rgb(31, 119, 180);
-  fill-opacity: .25;
-  stroke: rgb(31, 119, 180);
-  stroke-width: 1px;
+.node {
+  cursor: pointer;
 }
 
-.leaf circle {
-  fill: #ff7f0e;
-  fill-opacity: 1;
+.node:hover {
+  stroke: #000;
+  stroke-width: 1.5px;
 }
 
-text {
-  font: 10px sans-serif;
+.node--leaf {
+  fill: white;
+}
+
+.label {
+  font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-anchor: middle;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+}
+
+.label,
+.node--root,
+.node--leaf {
+  pointer-events: none;
 }
