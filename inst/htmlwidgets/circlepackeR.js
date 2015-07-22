@@ -26,7 +26,7 @@ HTMLWidgets.widget({
         .size([r, r])
         .value(function(d) { return d.size; });
 
-    var vis = d3.select("body").insert("svg:svg", "h2")
+    var vis = d3.select(el).insert("svg:svg", "h2")
         .attr("width", w)
         .attr("height", h)
         .append("svg:g")
@@ -127,7 +127,7 @@ HTMLWidgets.widget({
             });
     }
 
-    var data = JSON.parse(params.data);
+    var data = params.data;
 
     update(data);
 

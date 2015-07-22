@@ -5,14 +5,15 @@
 #' @import htmlwidgets
 #'
 #' @export
-circlepackeR <- function(path,
+circlepackeR <- function(data,
                          width = NULL, height = NULL) {
 
-  #read the json file
-  data <- suppressWarnings(paste(readLines(path), collapse = "\n"))
-
-  #data <- jsonlite::fromJSON(path)
-  #data <- jsonlite::toJSON(data)
+  # accept JSON string
+  data = jsonlite::toJSON(
+    jsonlite::fromJSON( data )
+    , auto_unbox = TRUE
+    , dataframe = "rows"
+  )
 
   # create a list that contains the data
   x = list(

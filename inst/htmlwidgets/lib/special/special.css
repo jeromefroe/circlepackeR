@@ -1,9 +1,10 @@
+/*
 html, body {
   overflow: hidden;
   margin: 0;
   font-family: "Helvetica Neue", Helvetica;
 }
-
+*/
 text {
   font-size: 11px;
   pointer-events: none;
@@ -31,5 +32,5 @@ circle.parent:hover {
 }
 
 circle.child {
-   pointer-events: none;
+  pointer-events: none;
 }
