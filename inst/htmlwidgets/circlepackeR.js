@@ -14,9 +14,9 @@ HTMLWidgets.widget({
 
   renderValue: function(el, params, instance) {
 
-    var w = 650,
-        h = 565,
-        r = 500,
+    var w = parseInt(d3.select(el).style("width")),    // 650
+        h = parseInt(d3.select(el).style("height")),   // 565
+        r = parseInt(h)*0.9,                           // 500
         x = d3.scale.linear().range([0, r]),
         y = d3.scale.linear().range([0, r]),
         node,
