@@ -17,7 +17,7 @@ circlepackeR <- function(data, width = NULL, height = NULL) {
   } else if (inherits(data, "list")) {  # accept hierarchical list
     data = jsonlite::toJSON(data, auto_unbox = TRUE)
   } else{
-    stop("Please provide a json object or list", call.=FALSE)
+    stop("Please provide a json object or list", call. = FALSE)
   }
 
   # create a list that contains the data
