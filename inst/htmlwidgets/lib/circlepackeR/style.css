@@ -1,36 +1,24 @@
-/*
-html, body {
-  overflow: hidden;
-  margin: 0;
-  font-family: "Helvetica Neue", Helvetica;
-}
-*/
-text {
-  font-size: 11px;
-  pointer-events: none;
+.circlepackeR .node {
+  cursor: pointer;
 }
 
-text.parent {
-  fill: #1f77b4;
+.circlepackeR .node:hover {
+  stroke: #000;
+  stroke-width: 1.5px;
 }
 
-circle {
-  fill: #ccc;
-  stroke: #999;
-  pointer-events: all;
+.circlepackeR .node--leaf {
+  fill: white;
 }
 
-circle.parent {
-  fill: #1f77b4;
-  fill-opacity: .1;
-  stroke: steelblue;
+.circlepackeR .label {
+  font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-anchor: middle;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
 }
 
-circle.parent:hover {
-  stroke: #ff7f0e;
-  stroke-width: .5px;
-}
-
-circle.child {
+.circlepackeR .label,
+.circlepackeR .node--root,
+.circlepackeR .node--leaf {
   pointer-events: none;
 }
