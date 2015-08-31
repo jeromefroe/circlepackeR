@@ -14,6 +14,9 @@ HTMLWidgets.widget({
 
   renderValue: function(el, x, instance) {
 
+    // much of this code is based on this example by Mike Bostock
+    //   https://gist.github.com/mbostock/7607535
+
     var margin = 20,
     diameter = Math.min(parseInt(d3.select(el).style("width")),
                         parseInt(d3.select(el).style("height")));

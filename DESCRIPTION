@@ -3,7 +3,18 @@ Type: Package
 Title: htmlwidget for Mike Bostock d3.js circle packing visualization
 Version: 0.1
 Date: 2015-08-31
-Author: Jerome Froelich
+Author@R: c(
+      person(
+        "Mike", "Bostock"
+        , role = c("aut", "cph")
+        , comment = "d3.js library in htmlwidgets/lib, http://d3js.org,
+        and circle pack example code https://gist.github.com/mbostock/7607535"
+      ),
+      person(
+        "Jerome","Froelich"
+        , role = c("aut", "cre")
+        , comment  = "htmlwidget interface in R"
+      )
 Maintainer: Jerome Froelich <jeromefroelich@hotmail.com>
 Description: Function to create interactive d3.js circle packing visualizations in R through the
               htmlwidgets package.
