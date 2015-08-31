@@ -1,10 +1,13 @@
 Package: circlepackeR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: htmlwidget for Mike Bostock d3.js circle packing visualization
 Version: 0.1
-Date: 2015-07-06
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Date: 2015-08-31
+Author: Jerome Froelich
+Maintainer: Jerome Froelich <jeromefroelich@hotmail.com>
+Description: Function to create interactive d3.js circle packing visualizations in R through the
+              htmlwidgets package.
+License: MIT
 LazyData: TRUE
+Imports:
+  htmlwidgets

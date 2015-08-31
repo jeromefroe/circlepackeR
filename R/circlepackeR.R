@@ -1,6 +1,10 @@
 #' htmlwidget for d3.js zoomable circle packing visualizations
 #'
-#' <Add Description>
+#' \href{http://bl.ocks.org/mbostock/7607535}{Circle packing visualizations} provide
+#' an interactive way of exploring hierarchical data that contains elements of different
+#' sizes or magnitudes
+#'
+#' @param data data in the form of a hierarchical list or a nested d3 JSON hierarchy
 #'
 #' @import htmlwidgets
 #'
