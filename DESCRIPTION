@@ -22,3 +22,5 @@ License: MIT
 LazyData: TRUE
 Imports:
   htmlwidgets
+Suggests:
+  data.tree

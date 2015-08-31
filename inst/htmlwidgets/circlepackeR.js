@@ -14,12 +14,17 @@ HTMLWidgets.widget({
 
   renderValue: function(el, x, instance) {
 
+    // remove previous in case of dynamic/Shiny
+    d3.select(el).selectAll('*').remove();
+
     // much of this code is based on this example by Mike Bostock
     //   https://gist.github.com/mbostock/7607535
 
     var margin = 20,
-    diameter = Math.min(parseInt(d3.select(el).style("width")),
-                        parseInt(d3.select(el).style("height")));
+    // use getBoundingClientRect since width and height
+    //  might not be in pixels
+    diameter = Math.min(el.getBoundingClientRect().width,
+                        el.getBoundingClientRect().height);
 
     var color = d3.scale.linear()
         .domain([-1, 5])
@@ -29,7 +34,7 @@ HTMLWidgets.widget({
     var pack = d3.layout.pack()
         .padding(2)
         .size([diameter - margin, diameter - margin])
-        .value(function(d) { return d.size; })
+        .value(function(d) { return d[x.options.size]; })
 
     var svg = d3.select(el).append("svg")
         .attr("width", diameter)

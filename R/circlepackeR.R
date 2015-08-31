@@ -5,11 +5,15 @@
 #' sizes or magnitudes
 #'
 #' @param data data in the form of a hierarchical list or a nested d3 JSON hierarchy
+#' @param size string representing the name of the size variable.  \code{"size"} is
+#'          the default.
+#'
+#' @example ./inst/examples/example.R
 #'
 #' @import htmlwidgets
 #'
 #' @export
-circlepackeR <- function(data, width = NULL, height = NULL) {
+circlepackeR <- function(data, size = "size", width = NULL, height = NULL) {
 
   # accept JSON
   if (inherits(data, c("character", "connection", "json"))) {
@@ -20,6 +24,13 @@ circlepackeR <- function(data, width = NULL, height = NULL) {
     )
   } else if (inherits(data, "list")) {  # accept hierarchical list
     data = jsonlite::toJSON(data, auto_unbox = TRUE)
+  } else if( inherits(data, "Node") ){ #accept data.tree
+    #  check to make sure data.tree is available to avoid
+    #   dependency
+    if(!requireNamespace("data.tree")) stop("please install data.tree.",call.=FALSE)
+    # convert Node to list
+    data = as.list( data, mode = "explicit", unname = TRUE  )
+    data = jsonlite::toJSON(data, auto_unbox = TRUE)
   } else{
     stop("Please provide a json object or list", call. = FALSE)
   }
@@ -27,6 +38,9 @@ circlepackeR <- function(data, width = NULL, height = NULL) {
   # create a list that contains the data
   x = list(
     data = data
+    ,options = list(
+      size = size
+    )
   )
 
   # create widget
@@ -43,7 +57,7 @@ circlepackeR <- function(data, width = NULL, height = NULL) {
 #'
 #' @export
 circlepackeROutput <- function(outputId, width = '100%', height = '400px'){
-  shinyWidgetOutput(outputId, 'circlepackeR', width, height, package = 'circlepackeR')
+  htmlwidgets::shinyWidgetOutput(outputId, 'circlepackeR', width, height, package = 'circlepackeR')
 }
 
 #' Widget render function for use in Shiny
@@ -51,5 +65,5 @@ circlepackeROutput <- function(outputId, width = '100%', height = '400px'){
 #' @export
 renderCirclepackeR <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
-  shinyRenderWidget(expr, circlepackeROutput, env, quoted = TRUE)
+  htmlwidgets::shinyRenderWidget(expr, circlepackeROutput, env, quoted = TRUE)
 }
