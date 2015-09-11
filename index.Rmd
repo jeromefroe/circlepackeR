@@ -1,0 +1,80 @@
+---
+title: "D3 Zoomable Circle Packing Visualization"
+output: html_document
+---
+
+This is an htmlwidget port of Mike Bostocks's [circle packing visualization.](http://bl.ocks.org/mbostock/7607535) View code on [Github.](https://github.com/jeromefroe/circlepackeR)
+
+### Usage
+
+This widget can be downloaded from github with the following command:
+
+```{r, eval = FALSE}
+devtools::install_github("jeromefroe/circlepackeR")
+```
+
+Currently, the circlepackeR function asccepts json data, hierarchical lists, and `data.tree` structures provided by the [data.tree](https://github.com/gluc/data.tree) package. Furthermore, one can use the `data.tree` package to transform a data frame into a `data.tree` structure which can be passed as an argument to circlepackeR.
+
+##### Data Frame
+
+Adapating the [example](https://cran.r-project.org/web/packages/data.tree/vignettes/data.tree.html#create-a-tree-from-a-data.frame) from the `data.tree` vignette of converting a data frame to a tree provides an example of how to use a data frame with circlepackeR.
+
+```{r}
+library(circlepackeR)
+library(data.tree)
+library(treemap)
+
+data(GNI2010)
+head(GNI2010)
+
+GNI2010$pathString <- paste("world", 
+                            GNI2010$continent, 
+                            GNI2010$country, 
+                            sep = "/")
+population <- as.Node(GNI2010)
+
+circlepackeR(population, size = "population")
+```
+
+##### JSON
+
+```{r}
+url <- "https://gist.githubusercontent.com/mbostock/1093025/raw/05621a578a66fba4d2cbf5a77e2d1bb3a27ac3d4/flare.json"
+circlepackeR(url)
+```
+
+##### Hierarchical List
+
+```{r}
+hierarchical_list <- list(name = "World",
+            children = list(
+              list(name = "North America",
+                   children = list(
+                     list(name = "United States", size = 308865000),
+                     list(name = "Mexico", size = 107550697),
+                     list(name = "Canada", size = 34033000))),
+              list(name = "South America", 
+                   children = list(
+                     list(name = "Brazil", size = 192612000),
+                     list(name = "Colombia", size = 45349000),
+                     list(name = "Argentina", size = 40134425))),
+              list(name = "Europe",  
+                   children = list(
+                     list(name = "Germany", size = 81757600),
+                     list(name = "France", size = 65447374),
+                     list(name = "United Kingdom", size = 62041708))),
+              list(name = "Africa",  
+                   children = list(
+                     list(name = "Nigeria", size = 154729000),
+                     list(name = "Ethiopia", size = 79221000),
+                     list(name = "Egypt", size = 77979000))),
+              list(name = "Asia",  
+                   children = list(
+                     list(name = "China", size = 1336335000),
+                     list(name = "India", size = 1178225000),
+                     list(name = "Indonesia", size = 231369500)))
+            )
+)
+
+circlepackeR(hierarchical_list)
+```
