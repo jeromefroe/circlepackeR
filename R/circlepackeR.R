@@ -25,13 +25,12 @@ circlepackeR <- function(data, size = "size", width = NULL, height = NULL) {
   } else if (inherits(data, "list")) {  # accept hierarchical list
     data = jsonlite::toJSON(data, auto_unbox = TRUE)
   } else if( inherits(data, "Node") ){ #accept data.tree
-    #  check to make sure data.tree is available to avoid
-    #   dependency
-    if(!requireNamespace("data.tree")) stop("please install data.tree.",call.=FALSE)
+    #  check to make sure data.tree is available to avoid dependency
+    if(!requireNamespace("data.tree")) stop("please install data.tree.", call. = FALSE)
     # convert Node to list
     data = as.list( data, mode = "explicit", unname = TRUE  )
     data = jsonlite::toJSON(data, auto_unbox = TRUE)
-  } else{
+  } else {
     stop("Please provide a json object or list", call. = FALSE)
   }
 

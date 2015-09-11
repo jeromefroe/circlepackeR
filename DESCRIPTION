@@ -5,16 +5,20 @@ Version: 0.0.0.9000
 Date: 2015-08-31
 Author@R: c(
       person(
-        "Mike", "Bostock"
-        , role = c("aut", "cph")
-        , comment = "d3.js library in htmlwidgets/lib, http://d3js.org,
+        "Mike", "Bostock",
+        role = c("aut", "cph"),
+        comment = "d3.js library in htmlwidgets/lib, http://d3js.org,
         and circle pack example code https://gist.github.com/mbostock/7607535"
       ),
       person(
-        "Jerome","Froelich"
-        , role = c("aut", "cre")
-        , comment  = "htmlwidget interface in R"
-      )
+        "Jerome","Froelich",
+        role = c("aut", "cre"),
+        comment  = "htmlwidget interface in R"
+      ),
+      person(
+        "Kent", "Russell",
+        role = c("ctb"), email = "kent.russell@timelyportfolio.com"),
+        comment = "major improvements to package")
 Maintainer: Jerome Froelich <jeromefroelich@hotmail.com>
 Description: Function to create interactive d3.js circle packing visualizations in R through the
               htmlwidgets package.
@@ -23,4 +27,5 @@ LazyData: TRUE
 Imports:
   htmlwidgets
 Suggests:
-  data.tree
+  data.tree,
+    testthat
