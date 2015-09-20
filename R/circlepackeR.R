@@ -7,13 +7,20 @@
 #' @param data data in the form of a hierarchical list or a nested d3 JSON hierarchy
 #' @param size string representing the name of the size variable.  \code{"size"} is
 #'          the default.
+#' @param color_min string representing the minimum value of the color range for the
+#'          circles. The string can be either a hexadecimal, RGB, or HSL color.
+#'          \code{"hsl(152,80\%,80\%)"} is the default.
+#' @param color_max string representing the maximum value of the color range for the
+#'          circles. The string can be either a hexadecimal, RGB, or HSL color.
+#'          \code{"hsl(228,30\%,40\%)"} is the default.
 #'
 #' @example ./inst/examples/example.R
 #'
 #' @import htmlwidgets
 #'
 #' @export
-circlepackeR <- function(data, size = "size", width = NULL, height = NULL) {
+circlepackeR <- function(data, size = "size", color_min = "hsl(152,80%,80%)",
+                         color_max = "hsl(228,30%,40%)", width = NULL, height = NULL) {
 
   # accept JSON
   if (inherits(data, c("character", "connection", "json"))) {
@@ -22,23 +29,26 @@ circlepackeR <- function(data, size = "size", width = NULL, height = NULL) {
       auto_unbox = TRUE,
       dataframe = "rows"
     )
+
   } else if (inherits(data, "list")) {  # accept hierarchical list
     data = jsonlite::toJSON(data, auto_unbox = TRUE)
-  } else if( inherits(data, "Node") ){ #accept data.tree
-    #  check to make sure data.tree is available to avoid dependency
-    if(!requireNamespace("data.tree")) stop("please install data.tree.", call. = FALSE)
-    # convert Node to list
-    data = as.list( data, mode = "explicit", unname = TRUE  )
+
+  } else if (inherits(data, "Node")) { # accept data.tree
+    if (!requireNamespace("data.tree")) stop("please install data.tree.", call. = FALSE)
+    data = as.list(data, mode = "explicit", unname = TRUE)
     data = jsonlite::toJSON(data, auto_unbox = TRUE)
+
   } else {
     stop("Please provide a json object or list", call. = FALSE)
   }
 
   # create a list that contains the data
   x = list(
-    data = data
-    ,options = list(
-      size = size
+    data = data,
+    options = list(
+      size = size,
+      color_min = color_min,
+      color_max = color_max
     )
   )
 

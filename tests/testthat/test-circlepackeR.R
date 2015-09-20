@@ -42,5 +42,12 @@ test_that("accepts hierarchical list input", {
 test_that("accepts data.tree input", {
   library(data.tree)
   data(acme)
-  expect_that(circlepackeR(acme, size = "cost" ), is_a("circlepackeR"))
+  expect_that(circlepackeR(acme, size = "cost"), is_a("circlepackeR"))
+})
+
+test_that("can change color range", {
+  library(data.tree)
+  data(acme)
+  expect_that(circlepackeR(acme, size = "cost", color_min = "hsl(56,80%,80%)",
+                           "hsl(341,30%,40%)"), is_a("circlepackeR"))
 })

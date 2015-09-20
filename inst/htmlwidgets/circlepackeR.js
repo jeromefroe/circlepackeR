@@ -28,7 +28,7 @@ HTMLWidgets.widget({
 
     var color = d3.scale.linear()
         .domain([-1, 5])
-        .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
+        .range([x.options.color_min, x.options.color_max])
         .interpolate(d3.interpolateHcl);
 
     var pack = d3.layout.pack()

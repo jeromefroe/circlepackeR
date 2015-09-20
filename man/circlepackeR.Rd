@@ -4,13 +4,22 @@
 \alias{circlepackeR}
 \title{htmlwidget for d3.js zoomable circle packing visualizations}
 \usage{
-circlepackeR(data, size = "size", width = NULL, height = NULL)
+circlepackeR(data, size = "size", color_min = "hsl(152,80\%,80\%)",
+  color_max = "hsl(228,30\%,40\%)", width = NULL, height = NULL)
 }
 \arguments{
 \item{data}{data in the form of a hierarchical list or a nested d3 JSON hierarchy}
 
 \item{size}{string representing the name of the size variable.  \code{"size"} is
-         the default.}
+the default.}
+
+\item{color_min}{string representing the minimum value of the color range for the
+circles. The string can be either a hexadecimal, RGB, or HSL color.
+\code{"hsl(152,80\%,80\%)"} is the default.}
+
+\item{color_max}{string representing the maximum value of the color range for the
+         circles. The string can be either a hexadecimal, RGB, or HSL color.
+         \code{"hsl(228,30\%,40\%)"} is the default.}
 }
 \description{
 \href{http://bl.ocks.org/mbostock/7607535}{Circle packing visualizations} provide
@@ -23,45 +32,10 @@ library(circlepackeR)
 # using json
 circlepackeR( "http://bl.ocks.org/mbostock/raw/7607535/flare.json" )
 
-# using hierarchical list
-hierarchical_list <- list(name = "World",
-                          children = list(
-                            list(name = "North America",
-                                 children = list(
-                                   list(name = "United States", size = 308865000),
-                                   list(name = "Mexico", size = 107550697),
-                                   list(name = "Canada", size = 34033000))),
-                            list(name = "South America",
-                                 children = list(
-                                   list(name = "Brazil", size = 192612000),
-                                   list(name = "Colombia", size = 45349000),
-                                   list(name = "Argentina", size = 40134425))),
-                            list(name = "Europe",
-                                 children = list(
-                                   list(name = "Germany", size = 81757600),
-                                   list(name = "France", size = 65447374),
-                                   list(name = "United Kingdom", size = 62041708))),
-                            list(name = "Africa",
-                                 children = list(
-                                   list(name = "Nigeria", size = 154729000),
-                                   list(name = "Ethiopia", size = 79221000),
-                                   list(name = "Egypt", size = 77979000))),
-                            list(name = "Asia",
-                                 children = list(
-                                   list(name = "China", size = 1336335000),
-                                   list(name = "India", size = 1178225000),
-                                   list(name = "Indonesia", size = 231369500)))
-                          )
-)
-
-circlepackeR(hierarchical_list)
-
-#  using data.tree
+# using data.tree
 \dontrun{
   library(data.tree)
-
   data(acme)
-
   circlepackeR(acme, size = "cost" )
 
 }
@@ -70,7 +44,6 @@ circlepackeR(hierarchical_list)
 \dontrun{
   library(data.tree)
   library(treemap)
-
   data(GNI2010)
   GNI2010$pathString <- paste("world",
                               GNI2010$continent,
@@ -78,7 +51,6 @@ circlepackeR(hierarchical_list)
                               sep = "/")
 
   population <- as.Node(GNI2010)
-
   circlepackeR(population, size = "population" )
 
 }
