@@ -3,21 +3,24 @@ title: "D3 Zoomable Circle Packing Visualization"
 output: html_document
 ---
 
-This is an htmlwidget port of Mike Bostocks's [circle packing visualization.](http://bl.ocks.org/mbostock/7607535) View code on [Github.](https://github.com/jeromefroe/circlepackeR)
+This is an htmlwidget port of Mike Bostocks's [circle packing visualization.](http://bl.ocks.org/mbostock/7607535) The source code is available on [Github.](https://github.com/jeromefroe/circlepackeR)
 
 ### Usage
 
-This widget can be downloaded from github with the following command:
+This package can be downloaded from github with the following command:
 
 ```{r, eval = FALSE}
 devtools::install_github("jeromefroe/circlepackeR")
 ```
 
-Currently, the circlepackeR function asccepts json data, hierarchical lists, and `data.tree` structures provided by the [data.tree](https://github.com/gluc/data.tree) package. Furthermore, one can use the `data.tree` package to transform a data frame into a `data.tree` structure which can be passed as an argument to circlepackeR.
+Currently, the circlepackeR function asccepts json data, hierarchical lists, and `data.tree` structures provided by the [data.tree](https://github.com/gluc/data.tree) package. Furthermore, one can use the `data.tree` package to transform a data frame into a `data.tree` structure which can be passed as an argument to circlepackeR. The `size` argument accepts a string which gives the key that will be used to set the size of the
+circles in the visualization. The `color_min` and `color_max` arguments accept strings 
+in the form of Hexadecimal, RGB, or HSL colors and set the minimum and maximum values for
+the color range of the circles.
 
-##### Data Frame
+### Data Frame
 
-Adapating the [example](https://cran.r-project.org/web/packages/data.tree/vignettes/data.tree.html#create-a-tree-from-a-data.frame) from the `data.tree` vignette of converting a data frame to a tree provides an example of how to use a data frame with circlepackeR.
+Adapating the [example](https://cran.r-project.org/web/packages/data.tree/vignettes/data.tree.html#create-a-tree-from-a-data.frame) from the `data.tree` vignette of converting a data frame to a tree provides an example of how to use a data frame with circlepackeR:
 
 ```{r}
 library(circlepackeR)
@@ -33,17 +36,18 @@ GNI2010$pathString <- paste("world",
                             sep = "/")
 population <- as.Node(GNI2010)
 
-circlepackeR(population, size = "population")
+circlepackeR(population, size = "population", color_min = "hsl(56,80%,80%)", 
+             color_max = "hsl(341,30%,40%)")
 ```
 
-##### JSON
+### JSON
 
 ```{r}
 url <- "https://gist.githubusercontent.com/mbostock/1093025/raw/05621a578a66fba4d2cbf5a77e2d1bb3a27ac3d4/flare.json"
 circlepackeR(url)
 ```
 
-##### Hierarchical List
+### Hierarchical List
 
 ```{r}
 hierarchical_list <- list(name = "World",
